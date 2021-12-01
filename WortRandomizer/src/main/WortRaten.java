@@ -1,17 +1,23 @@
 package main;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class WortRaten {
 
 	public static void main(String[] args) {
 		
 		WortRaten wr = new WortRaten();
-		wr.randomize("Bicycle");
+		
+		String wort = "Bicycle";
+		String wortNeu = wr.randomize(wort);
+		
+		//System.out.println("Altes Wort: " + wort + ". Neues Wort: " + wortNeu);
+		wr.zufallSpiel();
 
 	}
 	
-	public void randomize(String wort) {
+	public String randomize(String wort) {
 		
 		Random rnd = new Random();	
 		int index1, index2;
@@ -29,7 +35,37 @@ public class WortRaten {
 			
 		}
 		wortNeu = String.valueOf(wortAlsArray);
-		System.out.println("Altes Wort: " + wort + ". Neues Wort: " + wortNeu);
+		return wortNeu;
+	}
+	
+	public void zufallSpiel() {
+		Scanner in = new Scanner(System.in);
+		
+		System.out.println("Welches Wort möchtest du erraten? Eingabe:");
+		String wort = in.next();
+		
+		
+		wort = randomize(wort);
+		char[] wortArray = wort.toCharArray();
+		boolean[] errateneChars = new boolean[wortArray.length];
+		for (boolean b : errateneChars) {
+			b = false;
+		}
+		
+		System.out.println("Dein Wort: ");
+		int index = 0;
+		for (char c : wortArray) {
+			if (!errateneChars[index]) {
+				System.out.print("*");
+			} else {
+				System.out.print(wortArray[index]);
+			}
+			index++;
+		}
+		System.out.println();
+		
+		
+		
 	}
 
 }
