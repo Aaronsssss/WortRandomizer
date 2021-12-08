@@ -66,18 +66,21 @@ public class WortRaten {
 			String eingabe; 
 			eingabe = in.next();
 			char[] eingabeArray = eingabe.toCharArray();
-			
-			for (int i = 0; i<eingabe.length(); i++) {
-				if(eingabeArray[i] == wortArray[i]) {
-					errateneChars[i] = true;
+			try {
+				for (int i = 0; i<eingabe.length(); i++) {
+					if(eingabeArray[i] == wortArray[i]) {
+						errateneChars[i] = true;
+					}
 				}
+			} catch (Exception e) {
+				System.out.println("Wort zu lang!!");
 			}
 			charAusgabe(wortArray, errateneChars);
 			if(istFertig(errateneChars)) {
 				erraten = true;
 			}
 		}
-		System.out.println("Wow du hast es erraten!");
+		System.out.println("Wow du hast das Wort " + wort + " erraten!");
 		
 	}
 	
