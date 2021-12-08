@@ -46,6 +46,7 @@ public class WortRaten {
 		
 		
 		wort = randomize(wort);
+		System.out.println(wort);
 		char[] wortArray = wort.toCharArray();
 		boolean[] errateneChars = new boolean[wortArray.length];
 		for (boolean b : errateneChars) {
@@ -53,19 +54,53 @@ public class WortRaten {
 		}
 		
 		System.out.println("Dein Wort: ");
-		int index = 0;
-		for (char c : wortArray) {
-			if (!errateneChars[index]) {
+		charAusgabe(wortArray, errateneChars);
+		
+		
+		
+		
+		boolean erraten = false;
+		while(!erraten) {
+			System.out.println("Bitte raten sie dann mal: ");
+			
+			String eingabe; 
+			eingabe = in.next();
+			char[] eingabeArray = eingabe.toCharArray();
+			
+			for (int i = 0; i<eingabe.length(); i++) {
+				if(eingabeArray[i] == wortArray[i]) {
+					errateneChars[i] = true;
+				}
+			}
+			charAusgabe(wortArray, errateneChars);
+			if(istFertig(errateneChars)) {
+				erraten = true;
+			}
+		}
+		System.out.println("Wow du hast es erraten!");
+		
+	}
+	
+	public void charAusgabe(char[] arr, boolean[] erratene) {
+		
+		int i = 0;
+		for (char c : arr) {
+			if (!erratene[i]) {
 				System.out.print("*");
 			} else {
-				System.out.print(wortArray[index]);
+				System.out.print(arr[i]);
 			}
-			index++;
+			i++;
 		}
 		System.out.println();
-		
-		
-		
+	}
+	public boolean istFertig(boolean[] arr) {
+		for (boolean b : arr) {
+			if(!b) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }
