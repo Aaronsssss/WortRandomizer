@@ -41,14 +41,15 @@ public class WortRaten {
 	public void zufallSpiel() {
 		Scanner in = new Scanner(System.in);
 		
-		System.out.println("Welches Wort möchtest du erraten? Eingabe:");
+		System.out.println("Welches Wort möchtest du erraten? Eingabe:"); //Wort entgegen nehmen und randomizen
 		String wort = in.next();
 		
 		
 		wort = randomize(wort);
 		System.out.println(wort);
+		
 		char[] wortArray = wort.toCharArray();
-		boolean[] errateneChars = new boolean[wortArray.length];
+		boolean[] errateneChars = new boolean[wortArray.length]; //Array für erratene Buchstaben
 		for (boolean b : errateneChars) {
 			b = false;
 		}
@@ -61,14 +62,14 @@ public class WortRaten {
 		
 		boolean erraten = false;
 		while(!erraten) {
-			System.out.println("Bitte raten sie dann mal: ");
+			System.out.println("Bitte raten sie dann mal: "); //Anfang des Spiels als While schleife
 			
 			String eingabe; 
 			eingabe = in.next();
 			char[] eingabeArray = eingabe.toCharArray();
 			try {
 				for (int i = 0; i<eingabe.length(); i++) {
-					if(eingabeArray[i] == wortArray[i]) {
+					if(eingabeArray[i] == wortArray[i]) { //Jeden erratenen Buchstaben abspeichern
 						errateneChars[i] = true;
 					}
 				}
@@ -76,7 +77,7 @@ public class WortRaten {
 				System.out.println("Wort zu lang!!");
 			}
 			charAusgabe(wortArray, errateneChars);
-			if(istFertig(errateneChars)) {
+			if(istFertig(errateneChars)) { //Alle erraten? dann fertig
 				erraten = true;
 			}
 		}
@@ -84,7 +85,8 @@ public class WortRaten {
 		
 	}
 	
-	public void charAusgabe(char[] arr, boolean[] erratene) {
+	//Ausgabe der erratenen Buchstaben
+	public void charAusgabe(char[] arr, boolean[] erratene) { 
 		
 		int i = 0;
 		for (char c : arr) {
